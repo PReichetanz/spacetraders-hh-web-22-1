@@ -5,6 +5,9 @@ import UserStatusPage from './pages/UserStatusPage.js';
 import MarketPage from './pages/MarketPage.js';
 import { useEffect, useState } from 'react';
 
+import Status from './components/Status.js';
+import { ErrorBoundary } from 'react-error-boundary';
+import ErrorFallback from './components/ErrorFallback.js';
 function App() {
   const [token, setToken] = useState(loadFromLocal('token'));
   const [user, setUser] = useState(null);
@@ -35,6 +38,11 @@ function App() {
         <Route path="/ships" element={<ShipsPage />} />
         <Route path="/market" element={<MarketPage />} />
       </Routes>
+      <h1>Spacetraders</h1>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Status isGreen />
+        {/* ... more components go here */}
+      </ErrorBoundary>
     </div>
   );
 
